@@ -1,0 +1,29 @@
+1. ¿Cuál es la diferencia entre Git y GitHub?
+Git es el programa (sistema de control de versiones) que corre en tu computadora y lleva el registro de todos los cambios que haces en tu código: quién cambió qué, cuándo y por qué. Funciona sin necesidad de internet, todo pasa localmente en tu máquina.
+GitHub, en cambio, es un servicio web que aloja esos repositorios de Git en la nube. Es básicamente una red social/almacén para proyectos Git: te permite subir tu repositorio local a internet, compartirlo con otras personas, colaborar en equipo, revisar historial desde el navegador, etc. Podrías usar Git sin GitHub, pero GitHub necesita de Git para funcionar.
+
+2. ¿Qué función cumple el área de stage?
+Cuando modificas archivos en tu proyecto, esos cambios no se guardan automáticamente en el historial. El área de stage (también llamada "índice" o "staging area") es como una sala de espera intermedia entre tus archivos modificados y el commit. Ahí seleccionas exactamente qué cambios quieres incluir en el siguiente commit usando git add.
+Esto es útil porque puedes modificar 5 archivos, pero solo querer guardar los cambios de 2 de ellos en este commit —los otros 3 se quedan pendientes para después. Te da control fino sobre qué va en cada "fotografía" del proyecto.
+
+3. ¿Para qué sirve un commit?
+Un commit es como tomar una fotografía del estado exacto de tus archivos en ese momento, junto con un mensaje que explica qué cambiaste (por ejemplo: "Agrega función de login"). Cada commit queda guardado en el historial del repositorio de forma permanente.
+Sirve para: llevar un registro claro de la evolución del proyecto, poder regresar a una versión anterior si algo se rompe, entender por qué se hizo un cambio (gracias al mensaje), y trabajar en equipo sabiendo quién hizo qué cambio.
+
+4. ¿Cuál es la función del archivo .gitignore?
+Es un archivo de texto donde le dices a Git "ignora estos archivos/carpetas, no los tomes en cuenta ni los subas al repositorio". Se usa para excluir cosas que no deben compartirse o que no tiene sentido versionar, como: entornos virtuales (.venv), archivos de configuración con contraseñas o llaves API, carpetas temporales, archivos generados automáticamente (como __pycache__ en Python), o archivos del sistema operativo (como .DS_Store en Mac).
+Sin este archivo, Git intentaría rastrear y subir todo, incluyendo cosas que ensucian el repositorio o exponen información sensible.
+
+5. ¿Por qué no debe almacenarse normalmente el entorno virtual .venv en GitHub?
+Por varias razones prácticas:
+Pesa mucho: contiene todas las librerías instaladas, lo que puede ser cientos de MB.
+Es específico de tu máquina: las rutas y binarios dentro del entorno dependen del sistema operativo y de la ubicación donde lo creaste, así que no funcionaría igual en la computadora de otra persona.
+Es fácilmente reproducible: en vez de subir el entorno completo, se sube un archivo requirements.txt (con pip freeze > requirements.txt) que lista las librerías y versiones necesarias. Cualquiera puede crear su propio entorno virtual y correr pip install -r requirements.txt para tener exactamente lo mismo que tú, sin cargar con archivos innecesarios.
+
+6. ¿Qué relación existe entre el repositorio local y el repositorio remoto?
+El repositorio local vive en tu computadora: ahí haces tus cambios, agregas archivos al stage y haces commits día a día. El repositorio remoto vive en un servidor (en este caso GitHub) y es esencialmente una copia de ese mismo proyecto, pero accesible desde internet.
+Ambos se mantienen sincronizados mediante comandos: git push sube tus commits locales al remoto, y git pull trae al local los cambios que existan en el remoto (por ejemplo, si un compañero de equipo subió algo). Esta relación permite tener respaldo en la nube y colaborar sin perder el trabajo si tu computadora falla.
+
+7. ¿Qué diferencia existe entre ejecutar commit y ejecutar push?
+git commit guarda tus cambios en el historial de tu repositorio local, únicamente en tu computadora. Es un paso que puedes hacer todas las veces que quieras sin necesidad de internet ni de afectar el trabajo de nadie más.
+git push toma esos commits que ya guardaste localmente y los envía al repositorio remoto en GitHub, actualizándolo para que refleje tus cambios. Es hasta que haces push que tus cambios se vuelven visibles para otras personas o quedan respaldados en línea. En resumen: commit = guardar cambios localmente, push = compartir esos cambios en la nube.
